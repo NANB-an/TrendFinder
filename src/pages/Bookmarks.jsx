@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react'
-import { createClient } from '@supabase/supabase-js'
 import { useNavigate } from 'react-router-dom'
-import SignOut from '../components/SignOut'
-import useGenerateIdea from '../utils/generateIdea'
 import { supabase } from '../supabaseClient.js'
+import useGenerateIdea from '../utils/generateIdea'
 import Header from '../components/Header'
-import { API_BASE_URL } from '../config';
+
+import Particles from '../components/Particles'
+import { API_BASE_URL } from '../config'
+import '../styles/Bookmarks.css'
+
+// Font Awesome imports
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBookmark as solidBookmark } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as regularBookmark } from '@fortawesome/free-regular-svg-icons'
 
 export default function Bookmarks() {
   const [bookmarks, setBookmarks] = useState([])
@@ -26,7 +32,8 @@ export default function Bookmarks() {
 
       const json = await res.json()
       console.log('Bookmarks:', json)
-      setBookmarks(json.bookmarks || [])
+      const bookmarksWithFlag = (json.bookmarks || []).map(b => ({ ...b, isBookmarked: true }))
+      setBookmarks(bookmarksWithFlag)
     }
 
     checkSessionAndFetch()
@@ -44,17 +51,14 @@ export default function Bookmarks() {
       return
     }
 
-    const res = await fetch(
-      `${API_BASE_URL}bookmark/${bookmark.id}/`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${session.access_token}`,
-        },
-        body: JSON.stringify({ idea }),
-      }
-    )
+    const res = await fetch(`${API_BASE_URL}bookmark/${bookmark.id}/`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session.access_token}`,
+      },
+      body: JSON.stringify({ idea }),
+    })
 
     const data = await res.json()
     console.log('Updated:', data)
@@ -71,13 +75,10 @@ export default function Bookmarks() {
       return
     }
 
-    const res = await fetch(
-      `${API_BASE_URL}bookmark/${bookmark.id}/`,
-      {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${session.access_token}` },
-      }
-    )
+    const res = await fetch(`${API_BASE_URL}bookmark/${bookmark.id}/`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${session.access_token}` },
+    })
 
     const data = await res.json()
     console.log('Delete:', data)
@@ -87,36 +88,52 @@ export default function Bookmarks() {
   }
 
   return (
-    
-    <div className="p-4">
-        <Header onSignOut={handleSignedOut} />
-      <h1>Your Bookmarks</h1>
-      
+    <div className="bookmarks-page">
+      <div className="particles-wrap">
+        <Particles
+          particleColors={['#ffffff', '#ffffff']}
+          particleCount={200}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+        />
+      </div>
 
-      <ul className="mt-4">
+      <Header onSignOut={handleSignedOut} />
+
+      <div className="container">
+        <h1>Your Bookmarks</h1>
+
         {bookmarks.length === 0 && <p>No bookmarks yet.</p>}
-        {bookmarks.map((bookmark, idx) => (
-          <li key={bookmark.id} className="mb-4 border-b pb-2">
-            <a href={bookmark.url} target="_blank" rel="noreferrer">{bookmark.title}</a>
-            <p>r/{bookmark.subreddit}</p>
-            <p>gemini suggest: {bookmark.idea || 'No idea generated yet.'}</p>
 
-            <button
-              onClick={() => handleGenerateIdea(idx, bookmark)}
-              className="mt-2 mr-2 px-2 py-1 bg-purple-500 text-white rounded"
-            >
-              Generate Idea
-            </button>
+        <ul className="posts">
+          {bookmarks.map((bookmark, idx) => (
+            <li key={bookmark.id} className="post-card">
+              <a href={bookmark.url} target="_blank" rel="noreferrer">
+                {bookmark.title}
+              </a>
+              <p>r/{bookmark.subreddit}</p>
+              <p>Gemini Suggest: {bookmark.idea || 'No idea generated yet.'}</p>
 
-            <button
-              onClick={() => handleDelete(bookmark)}
-              className="mt-2 px-2 py-1 bg-red-500 text-white rounded"
-            >
-              Remove Bookmark
-            </button>
-          </li>
-        ))}
-      </ul>
+              <div className="post-actions">
+                <button onClick={() => handleGenerateIdea(idx, bookmark)}>Generate Idea</button>
+
+                {/* Remove Bookmark icon button */}
+                <button
+                  onClick={() => handleDelete(bookmark)}
+                  className="bookmark-btn"
+                  title="Remove Bookmark"
+                >
+                  <FontAwesomeIcon icon={solidBookmark} />
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
