@@ -5,7 +5,7 @@ import SignOut from '../components/SignOut'
 import useGenerateIdea from '../utils/generateIdea'
 import { supabase } from '../supabaseClient.js'
 import Header from '../components/Header'
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from '../config';
 
 
 
