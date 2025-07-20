@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '../supabaseClient.js'
 import useGenerateIdea from '../utils/generateIdea'
 import Header from '../components/Header'
+
 import Particles from '../components/Particles'
 import { API_BASE_URL } from '../config'
 import '../styles/Bookmarks.css'
