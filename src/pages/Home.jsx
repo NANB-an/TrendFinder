@@ -1,13 +1,19 @@
 import { useState, useEffect } from 'react'
-import { createClient } from '@supabase/supabase-js'
 import { useNavigate } from 'react-router-dom'
-import SignOut from '../components/SignOut'
 import useGenerateIdea from '../utils/generateIdea'
 import { supabase } from '../supabaseClient.js'
 import Header from '../components/Header'
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from '../config'
+import '../styles/Home.css'
+import Particles from '../components/Particles'
+import GlassSurface from '../components/GlassSurface'
+import Ballpit from '../components/Ballpit.jsx'
+import DotGrid from '../components/DotGrid'
 
-
+// ✅ Font Awesome imports
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBookmark as solidBookmark } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as regularBookmark } from '@fortawesome/free-regular-svg-icons'
 
 export default function Home() {
   const [subreddit, setSubreddit] = useState('')
@@ -41,7 +47,6 @@ export default function Home() {
     })
 
     const json = await res.json()
-    console.log('Trending:', json)
     setPosts(json.posts || [])
   }
 
@@ -66,7 +71,6 @@ export default function Home() {
         { method: 'DELETE', headers: { Authorization: `Bearer ${session.access_token}` } }
       )
       const data = await res.json()
-      console.log('Unbookmark:', data)
       const updated = [...posts]
       updated[idx].isBookmarked = false
       updated[idx].bookmark_id = null
@@ -89,7 +93,6 @@ export default function Home() {
         }
       )
       const data = await res.json()
-      console.log('Bookmark:', data)
       if (data.id) {
         const updated = [...posts]
         updated[idx].isBookmarked = true
@@ -100,46 +103,86 @@ export default function Home() {
   }
 
   return (
-    <div className="p-4">
-        <Header onSignOut={handleSignedOut} />
-      <h1>Reddit Trends</h1>
-      
-
-      <div className="mt-4">
-        <input
-          placeholder="Subreddit (optional)"
-          value={subreddit}
-          onChange={e => setSubreddit(e.target.value)}
-          className="border p-2"
+    <div className="home-page">
+      <div className="particles-wrap">
+        <Particles
+          particleColors={['#ffffff', '#ffffff']}
+          particleCount={200}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
         />
-        <button onClick={handleFetchTrending} className="ml-2 p-2 bg-blue-500 text-white">
-          Fetch Trending
-        </button>
       </div>
 
-      <ul className="mt-4">
-        {posts.map((post, idx) => (
-          <li key={idx} className="mb-4 border-b pb-2">
-            <a href={post.url} target="_blank" rel="noreferrer">{post.title}</a>
-            <p>gemini suggest: {post.idea || 'No idea generated yet.'}</p>
-            <p>r/{post.subreddit} | Score: {post.score}</p>
+      <Header onSignOut={handleSignedOut} />
 
-            <button
-              onClick={() => handleGenerateIdea(idx, post.title)}
-              className="mt-2 mr-2 px-2 py-1 bg-purple-500 text-white rounded"
-            >
-              Generate Idea
-            </button>
+      <div className="container">
+        <h1>Reddit Trends</h1>
 
-            <button
-              onClick={() => handleToggleBookmark(idx, post)}
-              className={`mt-2 px-2 py-1 rounded ${post.isBookmarked ? 'bg-red-500' : 'bg-green-500'} text-white`}
-            >
-              {post.isBookmarked ? 'Remove Bookmark' : 'Bookmark'}
-            </button>
-          </li>
-        ))}
-      </ul>
+        <div className="search-bar">
+          <GlassSurface
+            align="center"
+            width="100%"
+            height="auto"
+            borderRadius={12}
+            brightness={60}
+            opacity={0.8}
+            displace={15}
+            distortionScale={-150}
+            redOffset={5}
+            greenOffset={15}
+            blueOffset={25}
+            mixBlendMode="screen"
+            className="glass-surface"
+          >
+            <input
+              placeholder="Subreddit (optional)"
+              value={subreddit}
+              onChange={e => setSubreddit(e.target.value)}
+              style={{
+                width: '80%',
+                padding: '0.5rem 1rem',
+                border: 'none',
+                background: 'transparent',
+                color: 'inherit',
+                outline: 'none',
+                fontSize: '1rem',
+              }}
+            />
+          </GlassSurface>
+          <button onClick={handleFetchTrending}>Fetch Trending</button>
+        </div>
+
+        <ul className="posts">
+          {posts.map((post, idx) => (
+            <li key={idx} className="post-card">
+              <a href={post.url} target="_blank" rel="noreferrer">
+                {post.title}
+              </a>
+              <p>Gemini Suggest: {post.idea || 'No idea generated yet.'}</p>
+              <p>r/{post.subreddit} | Score: {post.score}</p>
+
+              <div className="post-actions">
+                <button onClick={() => handleGenerateIdea(idx, post.title)}>
+                  Generate Idea
+                </button>
+                <button
+                  onClick={() => handleToggleBookmark(idx, post)}
+                  className="bookmark-btn"
+                  title={post.isBookmarked ? 'Remove Bookmark' : 'Add Bookmark'}
+                >
+                  <FontAwesomeIcon
+                    icon={post.isBookmarked ? solidBookmark : regularBookmark}
+                  />
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }

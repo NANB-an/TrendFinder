@@ -1,0 +1,118 @@
+/* Base page container */
+.bookmarks-page {
+  background: #f8f9fa; /* Light mode background */
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bookmarks-page {
+    background: #111315; /* Dark mode background */
+  }
+}
+
+/* Reuse container from Home */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #111315;
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    color: #f8f9fa;
+  }
+}
+
+/* Headline */
+h1 {
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+}
+
+/* If you have <p> directly, style it */
+.bookmarks-page p {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bookmarks-page p {
+    color: #a7a9ab;
+  }
+}
+
+/* List of bookmarks */
+.posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Single bookmark card */
+.post-card {
+  background: #111315; /* Light mode: dark card */
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(17, 19, 21, 0.15);
+  color: #f8f9fa; /* Text is light on dark */
+}
+
+@media (prefers-color-scheme: dark) {
+  .post-card {
+    background: #f8f9fa; /* Dark mode: light card */
+    color: #111315; /* Text is dark on light */
+    box-shadow: 0 4px 12px rgba(248, 249, 250, 0.1);
+  }
+}
+
+.post-card a {
+  color: #a7a9ab;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.post-card a:hover {
+  text-decoration: underline;
+}
+
+.post-card p {
+  margin: 0.5rem 0;
+}
+
+/* Buttons container */
+.post-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.post-actions button {
+  padding: 0.4rem 0.75rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Generate Idea button style */
+.post-actions button:first-child {
+  background: #a7a9ab;
+  color: #111315;
+}
+
+.post-actions button:first-child:hover {
+  background: #111315;
+  color: #f8f9fa;
+}
+
+/* Remove Bookmark button style */
+.post-actions button:last-child {
+  background: #111315;
+  color: #f8f9fa;
+}
+
+.post-actions button:last-child:hover {
+  background: #a7a9ab;
+  color: #111315;
+}

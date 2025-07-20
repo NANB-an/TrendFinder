@@ -1,0 +1,206 @@
+/* -------------- Base reset -------------- */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* -------------- Particles background -------------- */
+.particles-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  background-color: #f8f9fa; /* Light mode base */
+}
+
+@media (prefers-color-scheme: dark) {
+  .particles-wrap {
+    background-color: #111315; /* Dark mode base */
+  }
+}
+
+/* -------------- Page container -------------- */
+.home-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* -------------- Content container -------------- */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 9rem 2rem 2rem;
+  position: relative;
+  z-index: 1;
+  color: #111315; /* Light mode text */
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    color: #f8f9fa; /* Dark mode text */
+  }
+}
+
+/* -------------- Header styling -------------- */
+header {
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  color: inherit;
+}
+
+/* -------------- Search bar -------------- */
+.search-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.search-bar input {
+  flex: 1 1 auto;
+  padding: 0.5rem;
+  border: 1px solid #a7a9ab;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #111315;
+}
+
+.search-bar button {
+  padding: 0.5rem 1rem;
+  background: #a7a9ab;
+  color: #111315;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background: #111315;
+  color: #f8f9fa;
+}
+
+@media (prefers-color-scheme: dark) {
+  .search-bar input {
+    background: #111315;
+    color: #f8f9fa;
+    border: 1px solid #a7a9ab;
+  }
+
+  .search-bar button {
+    background: #a7a9ab;
+    color: #111315;
+  }
+
+  .search-bar button:hover {
+    background: #f8f9fa;
+    color: #111315;
+  }
+}
+
+/* -------------- Posts list -------------- */
+.posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-card {
+  background: #ffffff; /* Light mode */
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(17, 19, 21, 0.15);
+  color: #111315;
+}
+
+.post-card a {
+  color: #a7a9ab;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.post-card a:hover {
+  text-decoration: underline;
+}
+
+.post-card p {
+  margin: 0.5rem 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .post-card {
+    background: #1a1c1e;
+    color: #f8f9fa;
+    box-shadow: 0 4px 12px rgba(248, 249, 250, 0.1);
+  }
+
+  .post-card a {
+    color: #a7a9ab;
+  }
+}
+
+/* -------------- Post actions -------------- */
+.post-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.post-actions button {
+  padding: 0.4rem 0.75rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.post-actions button:first-child {
+  background: #111315;
+  color: #f8f9fa;
+}
+
+.post-actions button:first-child:hover {
+  background: #a7a9ab;
+  color: #111315;
+}
+
+.post-actions button:last-child {
+  background: #a7a9ab;
+  color: #111315;
+}
+
+.post-actions button:last-child:hover {
+  background: #111315;
+  color: #f8f9fa;
+}
+
+.post-card button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+@media (prefers-color-scheme: dark) {
+  .post-actions button:disabled {
+    background: #555;
+  }
+}
+
+/* -------------- Responsive tweaks -------------- */
+@media (max-width: 640px) {
+  .search-bar {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .search-bar input,
+  .search-bar button {
+    width: 100%;
+  }
+}

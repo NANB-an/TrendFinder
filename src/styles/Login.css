@@ -1,0 +1,71 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa; /* Light mode */
+  padding: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .login-page {
+    background: #111315; /* Dark mode */
+  }
+}
+
+/* Now GlassSurface IS the login box */
+.login-box {
+  display: flex;                /* Make sure it’s flex */
+  flex-direction: column;       /* Stack heading + button */
+  justify-content: center;      /* Center vertically inside */
+  align-items: center;          /* Center horizontally */
+  
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(17, 19, 21, 0.15);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  color: #111315;
+  background: transparent;      /* GlassSurface handles look */
+}
+
+@media (prefers-color-scheme: dark) {
+  .login-box {
+    color: #f8f9fa;
+    box-shadow: 0 4px 12px rgba(248, 249, 250, 0.1);
+  }
+}
+
+.login-box h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.login-box button {
+  padding: 0.75rem 1.5rem;
+  background: #a7a9ab;
+  color: #111315;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background: #111315;
+  color: #f8f9fa;
+}
+
+@media (prefers-color-scheme: dark) {
+  .login-box button {
+    background: #111315;
+    color: #f8f9fa;
+  }
+
+  .login-box button:hover {
+    background: #a7a9ab;
+    color: #111315;
+  }
+}
+
+

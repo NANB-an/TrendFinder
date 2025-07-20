@@ -1,0 +1,80 @@
+/* src/components/Header.css */
+
+/* Header container */
+.header {
+  display: flex;
+  width: 98%;
+  position: fixed;
+  left: 0; /* optional, but ensures left edge aligns with screen */
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  justify-content: flex-start; /* left align */
+  padding: 1rem;
+  color: #ffffff; /* default text color */
+}
+
+/* GlassSurface: left-aligned content */
+.glass-surface {
+  display: flex;
+  align-items: center;
+  justify-content: right; /* left align items inside */
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  width: 100%;
+  max-width: none; 
+  margin: 0; 
+}
+
+/* Nav links container */
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Make nav links plain white, no underline */
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  text-decoration: none; /* keep no underline on hover */
+}
+
+/* Sign Out button — plain white text, no background */
+.sign-out-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  padding: 0;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  font: inherit; /* match surrounding text */
+  text-decoration: none; /* make sure */
+}
+
+.sign-out-btn:hover {
+  text-decoration: none; /* no underline on hover */
+}
+
+/* Mobile stack */
+@media (max-width: 640px) {
+  .glass-surface {
+    flex-direction: column;
+    align-items: flex-start; 
+    justify-content: right;
+    text-align: left;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .sign-out-btn {
+    width: auto;
+  }
+}
