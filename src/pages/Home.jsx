@@ -5,6 +5,7 @@ import SignOut from '../components/SignOut'
 import useGenerateIdea from '../utils/generateIdea'
 import { supabase } from '../supabaseClient.js'
 import Header from '../components/Header'
+import { API_BASE_URL } from './config';
 
 
 
@@ -32,8 +33,8 @@ export default function Home() {
     }
 
     const url = subreddit.trim()
-      ? `http://127.0.0.1:8000/api/trending/?subreddit=${subreddit.trim()}`
-      : `http://127.0.0.1:8000/api/trending/`
+      ? `${API_BASE_URL}trending/?subreddit=${subreddit.trim()}`
+      : `${API_BASE_URL}trending/`
 
     const res = await fetch(url, {
       headers: { Authorization: `Bearer ${session.access_token}` },
@@ -61,7 +62,7 @@ export default function Home() {
 
     if (post.isBookmarked && post.bookmark_id) {
       const res = await fetch(
-        `http://127.0.0.1:8000/api/bookmark/${post.bookmark_id}/`,
+        `${API_BASE_URL}bookmark/${post.bookmark_id}/`,
         { method: 'DELETE', headers: { Authorization: `Bearer ${session.access_token}` } }
       )
       const data = await res.json()
@@ -72,7 +73,7 @@ export default function Home() {
       setPosts(updated)
     } else {
       const res = await fetch(
-        'http://127.0.0.1:8000/api/bookmark/',
+        `${API_BASE_URL}bookmark/`,
         {
           method: 'POST',
           headers: {

@@ -5,6 +5,7 @@ import SignOut from '../components/SignOut'
 import useGenerateIdea from '../utils/generateIdea'
 import { supabase } from '../supabaseClient.js'
 import Header from '../components/Header'
+import { API_BASE_URL } from './config';
 
 export default function Bookmarks() {
   const [bookmarks, setBookmarks] = useState([])
@@ -19,7 +20,7 @@ export default function Bookmarks() {
         return
       }
 
-      const res = await fetch('http://127.0.0.1:8000/api/get_bookmarks/', {
+      const res = await fetch(`${API_BASE_URL}get_bookmarks/`, {
         headers: { Authorization: `Bearer ${session.access_token}` },
       })
 
@@ -44,7 +45,7 @@ export default function Bookmarks() {
     }
 
     const res = await fetch(
-      `http://127.0.0.1:8000/api/bookmark/${bookmark.id}/`,
+      `${API_BASE_URL}bookmark/${bookmark.id}/`,
       {
         method: 'PATCH',
         headers: {
@@ -71,7 +72,7 @@ export default function Bookmarks() {
     }
 
     const res = await fetch(
-      `http://127.0.0.1:8000/api/bookmark/${bookmark.id}/`,
+      `${API_BASE_URL}bookmark/${bookmark.id}/`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${session.access_token}` },
