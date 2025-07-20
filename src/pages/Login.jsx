@@ -1,7 +1,7 @@
 import { supabase } from '../supabaseClient.js';
 import '../styles/Login.css';
 import GlassSurface from '../components/GlassSurface';
-import Particles from '../components/Particles'
+import Particles from '../components/Particles';
 
 export default function Login() {
   const handleSignIn = async () => {
@@ -24,13 +24,14 @@ export default function Login() {
           alphaParticles={false}
           disableRotation={false}
         />
-        
-
       </div>
-      <GlassSurface 
+
+      <h1>TrendFinder</h1>
+
+      <GlassSurface
+        onClick={handleSignIn}
         align="center"
-        width="40%"
-        height="auto"
+        width="15%"
         borderRadius={12}
         brightness={60}
         opacity={0.8}
@@ -40,13 +41,9 @@ export default function Login() {
         greenOffset={15}
         blueOffset={25}
         mixBlendMode="screen"
-        className="login-box"
-       
-        
-        
+        className="login-button"
       >
-        <h1>TrendFinder</h1>
-        <button onClick={handleSignIn}>Sign in with Google</button>
+        Sign in with Google
       </GlassSurface>
     </div>
   );

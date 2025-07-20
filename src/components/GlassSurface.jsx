@@ -23,6 +23,7 @@ const GlassSurface = ({
   className = "",
   style = {},
   align = "flex-end",
+  ...props
 }) => {
   const containerRef = useRef(null);
   const feImageRef = useRef(null);
@@ -249,6 +250,7 @@ const GlassSurface = ({
       <div
         className="glass-surface__content"
         style={{ justifyContent: align }}
+        {...props}
         >
         {children}
         </div>

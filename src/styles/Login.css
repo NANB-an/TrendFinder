@@ -1,71 +1,65 @@
 .login-page {
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column; /* Stack vertically */
+  align-items: center;    /* Center horizontally */
+  justify-content: center; /* Center vertically */
   background: #f8f9fa; /* Light mode */
-  padding: 1rem;
+  padding: 2rem;
+  position: relative;
+}
+
+.particles-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.login-page h1 {
+  margin: 2rem 0;
+  font-size: 3rem;
+  text-align: center;
+  color: #111315;
+  position: relative;
+  z-index: 1;
 }
 
 @media (prefers-color-scheme: dark) {
   .login-page {
-    background: #111315; /* Dark mode */
+    background: #111315;
   }
-}
 
-/* Now GlassSurface IS the login box */
-.login-box {
-  display: flex;                /* Make sure it’s flex */
-  flex-direction: column;       /* Stack heading + button */
-  justify-content: center;      /* Center vertically inside */
-  align-items: center;          /* Center horizontally */
-  
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(17, 19, 21, 0.15);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-  color: #111315;
-  background: transparent;      /* GlassSurface handles look */
-}
-
-@media (prefers-color-scheme: dark) {
-  .login-box {
+  .login-page h1 {
     color: #f8f9fa;
-    box-shadow: 0 4px 12px rgba(248, 249, 250, 0.1);
   }
 }
 
-.login-box h1 {
-  margin-bottom: 1.5rem;
-  font-size: 2rem;
-}
-
-.login-box button {
+.login-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   padding: 0.75rem 1.5rem;
-  background: #a7a9ab;
-  color: #111315;
-  border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
+  color: #111315;
+  text-align: center;
+  width: fit-content;
+  user-select: none;
+  border: none;
+  position: relative;
+  z-index: 1;
 }
 
-.login-box button:hover {
-  background: #111315;
+.login-button:hover {
   color: #f8f9fa;
 }
 
 @media (prefers-color-scheme: dark) {
-  .login-box button {
-    background: #111315;
+  .login-button {
     color: #f8f9fa;
   }
 
-  .login-box button:hover {
-    background: #a7a9ab;
-    color: #111315;
+  .login-button:hover {
+    color: #6b6b6b;
   }
 }
-
-
