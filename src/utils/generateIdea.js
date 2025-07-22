@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { API_BASE_URL } from '../config'
 
 export default function useGenerateIdea(supabase, navigate) {
   return useCallback(async (title) => {
@@ -10,7 +11,7 @@ export default function useGenerateIdea(supabase, navigate) {
       return null
     }
 
-    const res = await fetch('http://127.0.0.1:8000/api/generate_idea/', {
+    const res = await fetch(`${API_BASE_URL}generate_idea/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
