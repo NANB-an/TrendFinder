@@ -51,7 +51,7 @@ export default function Bookmarks() {
       return
     }
 
-    const res = await fetch(`${API_BASE_URL}bookmark/${bookmark.id}/`, {
+    const res = await fetch(`${API_BASE_URL}bookmark/${bookmark.id}/update/`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
